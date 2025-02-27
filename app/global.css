@@ -1,0 +1,6 @@
+body {
+    background: linear-gradient(90deg, rgb(0, 0, 0), transparent),
+        repeating-linear-gradient(to bottom, transparent, rgba(150, 150, 150, 0.8) 11%);
+
+    overflow-x: hidden;
+}

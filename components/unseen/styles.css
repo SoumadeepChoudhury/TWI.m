@@ -1,0 +1,17 @@
+.unseen {
+    margin: 20px;
+}
+
+.section-heading {
+    font-family: 'Courier New', Courier, monospace;
+    color: white;
+    margin-bottom: 0;
+}
+
+.cards-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+}

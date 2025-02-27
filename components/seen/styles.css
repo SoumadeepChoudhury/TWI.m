@@ -1,0 +1,85 @@
+.table-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    overflow-x: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffffea;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+thead {
+    background: #758aa0;
+    color: white;
+}
+
+th {
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+tbody tr {
+    border-bottom: 1px solid #ddd;
+    transition: background 0.3s ease;
+}
+
+tbody tr:hover {
+    background: #f1faff;
+}
+
+td {
+    padding: 12px 15px;
+    position: relative;
+}
+
+@media (max-width: 600px) {
+    table {
+        border: 0;
+        background: transparent;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tbody tr {
+        display: block;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        background: white;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 10px;
+    }
+
+    td {
+        display: block;
+        text-align: right;
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    td:last-child {
+        border-bottom: 0;
+    }
+
+    td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        text-transform: uppercase;
+        float: left;
+        color: #007BFF;
+    }
+
+    .empty-dataset {
+        color: white;
+    }
+}
