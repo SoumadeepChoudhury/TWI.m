@@ -9,21 +9,31 @@ export function Auth() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [role, setRole] = useState("Monitor");
+    const uname = document.getElementById("user-already-exists");
+
+    const focused = () => {
+        uname.style.display = 'none';
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!isLogin) {
             if (email.length > 0 && username.length > 0 && password.length > 0) {
-                await fetch("/api/posts", {
+                const resp = await fetch("/api/posts", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({ sql: `INSERT INTO USERS VALUES('${email}','${username}','${password}','${role}');` })
                 })
-                Cookies.set("username", username, { expires: 30 });
-                Cookies.set("role", role, { expires: 30 });
-                window.location.reload();
+                const data = await resp.json();
+                if ("error" != Object.keys(data)[0]) {
+                    Cookies.set("username", username, { expires: 30 });
+                    Cookies.set("role", role, { expires: 30 });
+                    window.location.reload();
+                } else {
+                    uname.style.display = 'block';
+                }
             }
         } else {
             if (username.length > 0 && password.length > 0) {
@@ -61,10 +71,12 @@ export function Auth() {
                     <input
                         type="name"
                         placeholder="Enter your username..."
+                        onFocus={focused}
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         required
                     />
+                    {!isLogin ? <p id="user-already-exists">Username alreasy exists...</p> : null}
                     {!isLogin ?
                         <input
                             type="email"

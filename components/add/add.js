@@ -10,17 +10,24 @@ export function Add({ data, setData }) {
 
     const handleSubmit = async () => {
         if (twi.trim() !== "") {
-            // onSubmit({ date: selectedDate, twi: twi });
             var formattedDate = selectedDate.toLocaleDateString("en-US", { month: "short", day: "2-digit", year: "numeric" });
-            await fetch("/api/posts", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ sql: `INSERT INTO DATA(date, twi, recordedby) VALUES('${formattedDate}','${twi}','${Cookies.get("username")}')` })
-            });
-
-            setData([{ date: formattedDate, twi: twi }, ...data]);
+            var isThere = false;
+            data.map((d) => {
+                if (d.date == formattedDate)
+                    isThere = true;
+            })
+            if (!isThere && twi > 0) {
+                await fetch("/api/posts", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ sql: `INSERT INTO DATA(date, twi, recordedby) VALUES('${formattedDate}','${twi}','${Cookies.get("username")}')` })
+                });
+                setData([{ date: formattedDate, twi: twi }, ...data]);
+            } else {
+                alert(twi <= 0 ? "Enter valid TWI data..." : "Data already exists on this date...")
+            }
             setTwi("");
         }
     };
