@@ -21,11 +21,11 @@ export function Navbar() {
         window.location.reload();
     }
 
-    const fetchData = async () => {
-        const data = await fetch("/api/posts");
-        const jsonData = await data.json();
-        console.log(jsonData.data[0]);
-    }
+    // const fetchData = async () => {
+    //     const data = await fetch("/api/posts");
+    //     const jsonData = await data.json();
+    //     console.log(jsonData.data[0]);
+    // }
 
     useEffect(() => {
         window.addEventListener('click', () => {
@@ -35,7 +35,7 @@ export function Navbar() {
             }
         });
 
-        fetchData();
+        // fetchData();
     }, [isOpen]);
 
 

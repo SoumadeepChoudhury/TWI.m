@@ -17,14 +17,17 @@ export function Add({ data, setData }) {
                     isThere = true;
             })
             if (!isThere && twi > 0) {
-                await fetch("/api/posts", {
+                const resp = await fetch("/api/posts", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({ sql: `INSERT INTO DATA(date, twi, recordedby) VALUES('${formattedDate}','${twi}','${Cookies.get("username")}')` })
                 });
-                setData([{ date: formattedDate, twi: twi }, ...data]);
+                const data_ = await resp.json();
+                console.log(data_);
+                if ("error" != Object.keys(data_))
+                    setData([{ date: formattedDate, twi: twi }, ...data]);
             } else {
                 alert(twi <= 0 ? "Enter valid TWI data..." : "Data already exists on this date...")
             }

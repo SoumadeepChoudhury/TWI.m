@@ -9,10 +9,11 @@ export function Auth() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [role, setRole] = useState("Monitor");
-    const uname = document.getElementById("user-already-exists");
+    var uname = !isLogin ? document.getElementById("user-already-exists") : null;
 
     const focused = () => {
-        uname.style.display = 'none';
+        if (!isLogin && uname != null)
+            uname.style.display = 'none';
     }
 
     const handleSubmit = async (e) => {
@@ -32,7 +33,8 @@ export function Auth() {
                     Cookies.set("role", role, { expires: 30 });
                     window.location.reload();
                 } else {
-                    uname.style.display = 'block';
+                    if (uname != null)
+                        uname.style.display = 'block';
                 }
             }
         } else {
@@ -126,7 +128,7 @@ export function Auth() {
                 </form>
 
                 <p className="register-link">
-                    {isLogin ? "Don't" : "Already"} have an account? <a style={{ cursor: 'pointer' }} onClick={() => setIsLogin(!isLogin)}>{isLogin ? "Sign Up" : "Login"}</a>
+                    {isLogin ? "Don't" : "Already"} have an account? <a style={{ cursor: 'pointer' }} onClick={() => { setIsLogin(!isLogin); uname = document.getElementById("user-already-exists"); }}>{isLogin ? "Sign Up" : "Login"}</a>
                 </p>
             </div>
         </div>
