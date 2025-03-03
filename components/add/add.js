@@ -25,9 +25,11 @@ export function Add({ data, setData }) {
                     body: JSON.stringify({ sql: `INSERT INTO DATA(date, twi, recordedby) VALUES('${formattedDate}','${twi}','${Cookies.get("username")}')` })
                 });
                 const data_ = await resp.json();
-                console.log(data_);
-                if ("error" != Object.keys(data_))
-                    setData([{ date: formattedDate, twi: twi }, ...data]);
+                try {
+                    console.log(data_.data['affectedRows'] == 1);
+                    if ("error" != Object.keys(data_) && data_.data['affectedRows'] == 1)
+                        setData([{ date: formattedDate, twi: twi }, ...data]);
+                } catch (e) { }
             } else {
                 alert(twi <= 0 ? "Enter valid TWI data..." : "Data already exists on this date...")
             }

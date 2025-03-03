@@ -3,16 +3,24 @@ import './styles.css'
 
 export function Card({ date, twi, recordedBy, data, setData, index, getLengthOfUnseenData }) {
     async function markChecked() {
-        await fetch("/api/posts", {
+        const resp = await fetch("/api/posts", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({ sql: `UPDATE DATA SET checkedby = '${Cookies.get("username")}' WHERE date = '${date}';` })
         });
-        data[index].checkedby = Cookies.get("username");
-        setData([...data]);
-        getLengthOfUnseenData();
+        const data_ = await resp.json();
+        try {
+            console.log(data_.data['affectedRows'] == 1);
+            if (data_.data['affectedRows'] == 1) {
+                data[index].checkedby = Cookies.get("username");
+                setData([...data]);
+                getLengthOfUnseenData();
+            }
+        } catch (e) {
+
+        }
     }
     return (
         <div className="card">
