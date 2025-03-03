@@ -19,7 +19,7 @@ export function Card({ date, twi, recordedBy, data, setData, index, getLengthOfU
                 getLengthOfUnseenData();
             }
         } catch (e) {
-
+            alert("Server error occured... Can't update data.. try refreshing the page or try again later..");
         }
     }
     return (
