@@ -29,6 +29,8 @@ export function Add({ data, setData }) {
                     console.log(data_.data['affectedRows'] == 1);
                     if ("error" != Object.keys(data_) && data_.data['affectedRows'] == 1)
                         setData([{ date: formattedDate, twi: twi }, ...data]);
+                    else
+                        throw new Error("Server error...");
                 } catch (e) { alert("Server error occured... Can't add new data.. try refreshing the page or try again later.."); }
             } else {
                 alert(twi <= 0 ? "Enter valid TWI data..." : "Data already exists on this date...");

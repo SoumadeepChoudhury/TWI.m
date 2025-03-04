@@ -17,7 +17,8 @@ export function Card({ date, twi, recordedBy, data, setData, index, getLengthOfU
                 data[index].checkedby = Cookies.get("username");
                 setData([...data]);
                 getLengthOfUnseenData();
-            }
+            } else
+                throw new Error("Server error...");
         } catch (e) {
             alert("Server error occured... Can't update data.. try refreshing the page or try again later..");
         }
