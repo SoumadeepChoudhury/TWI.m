@@ -17,6 +17,7 @@
     align-items: center;
 }
 
+
 #username {
     cursor: pointer;
     color: black;
@@ -25,6 +26,17 @@
     margin-top: 20px;
     display: flex;
     align-items: center;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+#username-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 /* Dropdown container */

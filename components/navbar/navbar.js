@@ -21,12 +21,6 @@ export function Navbar() {
         window.location.reload();
     }
 
-    // const fetchData = async () => {
-    //     const data = await fetch("/api/posts");
-    //     const jsonData = await data.json();
-    //     console.log(jsonData.data[0]);
-    // }
-
     useEffect(() => {
         window.addEventListener('click', () => {
             if (isOpen) {
@@ -44,7 +38,10 @@ export function Navbar() {
             <div className='navbar'>
                 <div className={raleway.className} id='nav-head'>TWI.m</div>
                 <div className="dropdown-container">
-                    <div id='username' onClick={toggleDropdown}><span className='material-icons'>person</span> &nbsp;&nbsp;{Cookies.get("username")}</div>
+                    <div id='username' onClick={toggleDropdown}>
+                        <span className='material-icons'>person</span> &nbsp;&nbsp;
+                        <span id="username-text">{Cookies.get("username")}</span>
+                    </div>
                     {isOpen ?
                         <ul className="dropdown-menu">
                             <li><span className="material-icons">assistant_direction</span>&nbsp;&nbsp;{Cookies.get("role")}</li>

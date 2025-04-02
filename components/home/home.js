@@ -18,7 +18,16 @@ export function Home() {
         });
 
         const data = await resp.json();
-        setData(data.data.reverse());
+
+        const sortedData = data.data.sort((a, b) => {
+            const dateA = new Date(a.date);
+            const dateB = new Date(b.date);
+
+            return dateB - dateA;
+        });
+
+        // Now set the sorted data
+        setData(sortedData);
     }
 
     useEffect(() => {
